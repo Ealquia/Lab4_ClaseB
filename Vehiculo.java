@@ -46,9 +46,9 @@ public class Vehiculo implements IClimaB {
     }
 
     @Override
-    public int modoAutomatico(int temperaturaAmbiente) {
+    public String modoAutomatico(int temperaturaAmbiente) {
         temperatura = temperaturaAmbiente > 25 ? 22 : 24;
-        return (int) temperatura;
+        return String.valueOf(temperatura);
     }
 
     @Override

@@ -13,7 +13,7 @@ public interface IClimaB {
     int ajustarTemperatura(int incremento);
     
     // Activa el modo automático de climatización ajustando la temperatura según el clima externo
-    int modoAutomatico(int temperaturaAmbiente);
+    String modoAutomatico(int temperaturaAmbiente);
     
     // Configura el nivel de ventilación entre los valores 0 a 3
     String ajustarVentilacion(int intensidad);
