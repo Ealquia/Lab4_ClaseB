@@ -1,13 +1,11 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
 
 public class main{
     public static void main(String[] args) {
-        Vehiculo miVehiculo = new Vehiculo();
+        IClimaB miVehiculo = new Vehiculo();
         Scanner scanner = new Scanner(System.in);
         int opcion;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

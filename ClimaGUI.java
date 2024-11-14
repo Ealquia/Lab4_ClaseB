@@ -38,7 +38,7 @@ public class ClimaGUI extends JFrame {
         panel.setLayout(null);
 
         //Crear el vehículo
-        miBMW = new VehiculoBMW();
+        IClimaB miBMW = new VehiculoBMW();
 
         // Botón Encendido
         btnEncendido = new JButton("O");
