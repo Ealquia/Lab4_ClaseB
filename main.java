@@ -30,8 +30,8 @@ public class main{
             opcion = scanner.nextInt();
 
             switch (opcion) {
-                case 1 -> miVehiculo.encender();
-                case 2 -> miVehiculo.apagar();
+                case 1 -> System.out.print(miVehiculo.encender());
+                case 2 -> System.out.print(miVehiculo.apagar());
                 case 3 -> {
                     System.out.print("Ingrese incremento de temperatura: ");
                     int incremento = scanner.nextInt();
@@ -40,29 +40,29 @@ public class main{
                 case 4 -> {
                     System.out.print("Ingrese temperatura ambiente: ");
                     int tempAmbiente = scanner.nextInt();
-                    System.out.println("Modo automático activado. Temperatura ajustada a: " + miVehiculo.modoAutomatico(tempAmbiente) + "°C");
+                    System.out.println(miVehiculo.modoAutomatico(tempAmbiente) + ": " + tempAmbiente + "°C");
                 }
                 case 5 -> {
                     System.out.print("Ingrese nivel de ventilación (0 a 3): ");
                     int intensidad = scanner.nextInt();
-                    miVehiculo.ajustarVentilacion(intensidad);
+                    System.out.println(miVehiculo.ajustarVentilacion(intensidad));
                 }
                 case 6 -> miVehiculo.activarModoEco();
                 case 7 -> {
                     System.out.print("Ingrese dirección de ventilación (parabrisas, frontal, pies, todo): ");
                     String direccion = scanner.next();
-                    miVehiculo.ajustarDireccionVentilacion(direccion);
+                    System.out.println(miVehiculo.ajustarDireccionVentilacion(direccion));
                 }
                 case 8 -> {
                     System.out.print("Ingrese nivel de calefacción para asientos delanteros (0 a 3): ");
                     int nivelDelantero = scanner.nextInt();
                     System.out.print("Ingrese nivel de calefacción para asientos traseros (0 a 3): ");
                     int nivelTrasero = scanner.nextInt();
-                    miVehiculo.activarCalefaccionAsientos(nivelDelantero, nivelTrasero);
+                    System.out.println(miVehiculo.activarCalefaccionAsientos(nivelDelantero, nivelTrasero));
                 }
-                case 9 -> miVehiculo.activarCalefaccionRapida();
-                case 10 -> miVehiculo.activarDesempañador();
-                case 11 -> miVehiculo.desactivarDesempañador();
+                case 9 ->  System.out.println(miVehiculo.activarCalefaccionRapida());
+                case 10 ->  System.out.println(miVehiculo.activarDesempañador());
+                case 11 ->  System.out.println(miVehiculo.desactivarDesempañador());
                 case 12 -> {
                     System.out.print("Ingrese fecha de mantenimiento (formato: yyyy-MM-dd): ");
                     String fechaInput = scanner.next();
