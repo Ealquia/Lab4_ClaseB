@@ -47,7 +47,7 @@ public class VehiculoBMW implements IClimaB{
     @Override
     public String modoAutomatico(int temperaturaAmbiente) {
         this.temperatura = temperaturaAmbiente;  // Ajuste ejemplo
-        return "Se ha activado el modo automático. \n La temperatura interna se ajustará a la ambiente";
+        return "Se ha activado el modo automático. \n La temperatura interna se ajustará a la ambiente, que es de:  " + temperaturaAmbiente + "°C";
     }
 
     @Override

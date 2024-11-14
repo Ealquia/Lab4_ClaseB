@@ -16,7 +16,7 @@ public class Vehiculo implements IClimaB {
 
     public Vehiculo() {
         this.estado = false;
-        this.temperatura = 20.0f;  // Temperatura inicial
+        this.temperatura = 20;  // Temperatura inicial
         this.nivelVentilacion = 0;
         this.modoEco = false;
         this.direccionVentilacion = "frontal";
@@ -48,7 +48,7 @@ public class Vehiculo implements IClimaB {
     @Override
     public String modoAutomatico(int temperaturaAmbiente) {
         temperatura = temperaturaAmbiente > 25 ? 22 : 24;
-        return String.valueOf(temperatura);
+        return "Modo automático activado, la temperatura es de: " + String.valueOf(temperatura) + "°C";
     }
 
     @Override

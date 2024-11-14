@@ -40,7 +40,7 @@ public class main{
                 case 4 -> {
                     System.out.print("Ingrese temperatura ambiente: ");
                     int tempAmbiente = scanner.nextInt();
-                    System.out.println(miVehiculo.modoAutomatico(tempAmbiente) + ": " + tempAmbiente + "°C");
+                    System.out.println(miVehiculo.modoAutomatico(tempAmbiente));
                 }
                 case 5 -> {
                     System.out.print("Ingrese nivel de ventilación (0 a 3): ");

@@ -38,7 +38,7 @@ public class ClimaGUI extends JFrame {
         panel.setLayout(null);
 
         //Crear el vehículo
-        IClimaB miBMW = new VehiculoBMW();
+        miBMW = new Vehiculo();
 
         // Botón Encendido
         btnEncendido = new JButton("O");
@@ -173,11 +173,12 @@ public class ClimaGUI extends JFrame {
 	        public void itemStateChanged(ItemEvent e) {
 		        if (checkAuto.isSelected()) {
                     int tempAmbiente = 25;
-                    textTemp.setText(tempAmbiente + "°C"); 
+                    String tempAjustada = miBMW.modoAutomatico(tempAmbiente);
+                    textTemp.setText(tempAjustada.substring(tempAjustada.length() - 6)); 
                     JOptionPane.showMessageDialog(null, 
-                    miBMW.modoAutomatico(25), 
+                    tempAjustada, 
                     "Modo Automático", 
-                    JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.PLAIN_MESSAGE);
             }}
         });
 
@@ -186,9 +187,26 @@ public class ClimaGUI extends JFrame {
             @Override
 	        public void itemStateChanged(ItemEvent e) {
 		        if (checkEco.isSelected()) {
-                    sliderAsientosDelanteros.setValue(1);
-                    sliderAsientosTraseros.setValue(1);
-                    sliderIntensidad.setValue(1); }}
+                    sliderAsientosDelanteros.setValue(0);
+                    sliderAsientosTraseros.setValue(0);
+                    sliderIntensidad.setValue(0);
+                    JOptionPane.showMessageDialog(null, 
+                    miBMW.activarModoEco(), 
+                    "Modo Automático", 
+                    JOptionPane.PLAIN_MESSAGE); 
+                     }}
+        });
+
+        //Funcionalidad del desempañador
+        checkDesempanador.addItemListener(new ItemListener() {
+            @Override
+	        public void itemStateChanged(ItemEvent e) {
+		        String mensaje = checkDesempanador.isSelected()? miBMW.activarDesempañador() : miBMW.desactivarDesempañador();
+                JOptionPane.showMessageDialog(null, 
+                mensaje, 
+                "Desempañador", 
+                JOptionPane.PLAIN_MESSAGE);
+        }
         });
 
         // Funcionalidad del botón "Ver Historial"
