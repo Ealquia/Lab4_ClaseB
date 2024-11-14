@@ -2,108 +2,121 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Vehiculo implements IClimaB{
-    protected boolean encendido;
-    protected double temperatura;
-    protected int intensidadVentilacion;
-    protected String direccionVentilacion;
-    protected boolean modoEco;
-    protected int asientosDelanteros;
-    protected int asientosTraseros;
-    protected boolean desempanador;
-    protected List<String> historial;
-    protected Date citaMantenimiento;
+public class Vehiculo implements IClimaB {
+    private boolean estado;
+    private float temperatura;
+    private int nivelVentilacion;
+    private boolean modoEco;
+    private String direccionVentilacion;
+    private boolean desempañadorActivo;
+    private int asientosDelanteros;
+    private int asientosTraseros;
+    private List<String> mantenimiento;
+    private Date citaMantenimiento;
 
     public Vehiculo() {
-        this.encendido = false;
-        this.temperatura = 25.0;  // Temperatura inicial
-        this.intensidadVentilacion = 0;
-        this.direccionVentilacion = "frontal";
+        this.estado = false;
+        this.temperatura = 20.0f;  // Temperatura inicial
+        this.nivelVentilacion = 0;
         this.modoEco = false;
+        this.direccionVentilacion = "frontal";
+        this.desempañadorActivo = false;
         this.asientosDelanteros = 0;
         this.asientosTraseros = 0;
-        this.desempanador = false;
-        this.historial = new ArrayList<>();
+        this.mantenimiento = new ArrayList<>();
+        this.citaMantenimiento = null;
     }
 
     @Override
     public String encender() {
-        encendido = true;
+        estado = true;
         return "Sistema de climatización encendido.";
     }
 
     @Override
     public String apagar() {
-        encendido = false;
+        estado = false;
         return "Sistema de climatización apagado.";
     }
 
     @Override
-    public double ajustarTemperatura(int cambio) {
-        this.temperatura  += cambio;
-        return this.temperatura;
+    public int ajustarTemperatura(int incremento) {
+        temperatura += incremento;
+        return (int) temperatura;
     }
 
     @Override
-    public double modoAutomatico(int temperaturaAmbiente) {
-        this.temperatura = 25;  // Ajuste ejemplo
-        return this.temperatura;
+    public int modoAutomatico(int temperaturaAmbiente) {
+        temperatura = temperaturaAmbiente > 25 ? 22 : 24;
+        return (int) temperatura;
     }
 
     @Override
-    public int ajustarVentilacion(int intensidadVentilacion) {
-        if (intensidadVentilacion >= 1 && intensidadVentilacion <= 3) {
-            this.intensidadVentilacion = intensidadVentilacion;
-            historial.add("Intensidad de ventilación ajustada a nivel " + intensidadVentilacion);
+    public String ajustarVentilacion(int intensidad) {
+        if (intensidad >= 0 && intensidad <= 3) {
+            nivelVentilacion = intensidad;
+            return "Nivel de ventilación ajustado a: " + nivelVentilacion;
         } else {
-            historial.add("Error: Intensidad de ventilación fuera de rango.");
+            return "Nivel de ventilación inválido. Debe estar entre 0 y 3.";
         }
-        return this.intensidadVentilacion;
     }
 
     @Override
-    public void activarModoEco() {
-        modoEco = !modoEco;
+    public String activarModoEco() {
+        modoEco = true;
+        nivelVentilacion = Math.max(nivelVentilacion - 1, 0);  // Reduce intensidad en modo eco
+        return "Modo Eco activado. Nivel de ventilación ajustado a: " + nivelVentilacion;
     }
 
     @Override
-    public void ajustarDireccionVentilacion(String direccion) {
-        if (direccion.equals("parabrisas") || direccion.equals("frontal") ||
-            direccion.equals("pies") || direccion.equals("todo")) {
-            this.direccionVentilacion = direccion;
-        } 
+    public String ajustarDireccionVentilacion(String direccion) {
+        direccionVentilacion = direccion;
+        return "Dirección de ventilación ajustada a: " + direccionVentilacion;
     }
 
     @Override
-    public void activarCalefaccionAsientos(int nivelDelantero, int nivelTrasero){
+    public String activarCalefaccionAsientos(int nivelDelantero, int nivelTrasero) {
+        if (nivelDelantero >= 0 && nivelDelantero <= 3) {
+            asientosDelanteros = nivelDelantero;
+            return "Calefacción de asientos delanteros ajustada a: " + asientosDelanteros;
+        }
+        if (nivelTrasero >= 0 && nivelTrasero <= 3) {
+            asientosTraseros = nivelTrasero;
+            return "Calefacción de asientos traseros ajustada a: " + asientosTraseros;
+        }
 
+        else {
+            return "aqui hay error papi";
+        }
+    }
+
+    @Override
+    public String activarCalefaccionRapida() {
+        temperatura = 28.0f;
+        return "Calefacción rápida activada. Temperatura ajustada a: " + temperatura + "°C";
     }
 
     @Override
     public String activarDesempañador() {
-        desempanador = true;
-        return "Desempanador encendido.";
+        desempañadorActivo = true;
+        return "Desempañador activado.";
     }
 
     @Override
     public String desactivarDesempañador() {
-        desempanador = false;
-        historial.add("Desempanador apagado");
-        return "Desempanador apagado.";
+        desempañadorActivo = false;
+        return "Desempañador desactivado.";
     }
 
     @Override
-    public void activarCalefaccionRapida() {
-        this.temperatura = 30;
+    public String programarMantenimiento(Date fecha) {
+        citaMantenimiento = fecha;
+        mantenimiento.add("Mantenimiento programado para: " + fecha.toString());
+        return "Cita de mantenimiento programada para: " + fecha;
     }
 
     @Override
     public List<String> verHistorialMantenimiento() {
-        return historial;
-    }
-
-    @Override
-    public void programarMantenimiento(Date fecha) {
-        historial.add("Mantenimiento programado para " + fecha.toString());
+        return mantenimiento;
     }
 }
