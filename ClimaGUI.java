@@ -38,7 +38,7 @@ public class ClimaGUI extends JFrame {
         panel.setLayout(null);
 
         //Crear el vehículo
-        miBMW = new Vehiculo();
+        miBMW = new VehiculoBMW();
 
         // Botón Encendido
         btnEncendido = new JButton("O");
@@ -172,7 +172,13 @@ public class ClimaGUI extends JFrame {
             @Override
 	        public void itemStateChanged(ItemEvent e) {
 		        if (checkAuto.isSelected()) {
-                    textTemp.setText(miBMW.modoAutomatico(25) + "°C"); }}
+                    int tempAmbiente = 25;
+                    textTemp.setText(tempAmbiente + "°C"); 
+                    JOptionPane.showMessageDialog(null, 
+                    miBMW.modoAutomatico(25), 
+                    "Modo Automático", 
+                    JOptionPane.ERROR_MESSAGE);
+            }}
         });
 
         //Funcionalidad del Modo eco
